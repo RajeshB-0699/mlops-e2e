@@ -16,8 +16,8 @@ pipeline {
             steps {
                 script {
                     echo 'Testing & Linting'
-                    echo "cheking version"
-                    sh "python --version"
+                    echo "Installing all deps"
+                    sh "python -m pip install -r requirements.txt"
                 }
             }
         }
