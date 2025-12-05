@@ -64,7 +64,7 @@ pipeline {
                 script {
                     echo 'Building Docker Images'
                     echo 'Starting'
-                    docker.build("mlops-app-01")
+                    sh "docker build -t my-app-mlops-01"
                 }
             }
         }
