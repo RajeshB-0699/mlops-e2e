@@ -7,6 +7,7 @@ pipeline {
             steps {
                 script {
                     echo 'Cloning Repo...'
+                    checkout scmGit(branches: [[name: '*/Main']], extensions: [], userRemoteConfigs: [[credentialsId: 'e2e-mlops', url: 'https://github.com/RajeshB-0699/mlops-e2e.git']])
                 }
             }
         }

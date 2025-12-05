@@ -25,4 +25,4 @@ def test_flask_predict():
         assert response.status_code==200
         assert 'Predicted Iris Class' in response.get_data(as_text=True)
 
-        
+
