@@ -18,7 +18,9 @@ pipeline {
                     echo 'Testing & Linting'
                     echo "Installing all deps"
                     sh '''
-                    python -m pip install --upgrade pip
+                    python -m venv menv
+                    . menv/bin/activate
+                    pip install --upgrade pip
                     pip install -r requirements.txt
                     '''
                 }
