@@ -27,7 +27,7 @@ pipeline {
                     . menv/bin/activate
                     pylint app.py train.py --output=pylint-report.txt --exit-zero
                     flake8 app.py train.py --ignore=E501,E302 --output-file=flake8-report.txt
-                    sh black app.py train.py
+                    black app.py train.py
                     '''
                 }
             }
