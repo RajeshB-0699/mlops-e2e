@@ -61,16 +61,16 @@ pipeline {
 
         stage('Build Docker Image') {
         steps {
-            script {
-                echo 'Fixing Docker socket and building image...'
-
-                // This single magic line fixes it every time the pipeline runs
-                sh '''
-                    sudo chmod 666 /var/run/docker.sock || true
-                    docker version
-                    docker build -t my-app-mlops-01 .
-                '''
-            }
+            sh '''
+                # One-line nuclear fix that works every single time
+                sudo chmod 666 /var/run/docker.sock || true
+                
+                # Check if daemon is really alive
+                docker info || docker version
+                
+                # Build your image
+                docker build -t my-app-mlops-01 .
+            '''
         }
     }
 
