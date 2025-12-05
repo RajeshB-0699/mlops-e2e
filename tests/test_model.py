@@ -21,7 +21,7 @@ def test_flask_predict():
             'petal_length':4.5,
             'petal_width':1.8
         }
-        response = client.predict("/predict",data = form_data)
+        response = client.post("/predict",data = form_data)
         assert response.status_code==200
         assert 'Predicted Iris Class' in response.get_data(as_text=True)
 
