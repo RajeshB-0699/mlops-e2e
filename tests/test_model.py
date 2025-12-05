@@ -23,6 +23,7 @@ def test_flask_predict():
         }
         response = client.post("/predict",data = form_data)
         assert response.status_code==200
-        assert 'Predicted Iris Class' in response.get_data(as_text=True)
+        assert 'Predicted Iris class:' in response.get_data(as_text=True)
+
 
 
