@@ -63,6 +63,7 @@ pipeline {
             steps {
                 script {
                     echo 'Building Docker Images'
+                    docker.build("mlops-app-01")
                 }
             }
         }
