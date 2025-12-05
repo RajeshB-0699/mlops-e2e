@@ -23,9 +23,12 @@ pipeline {
                     pip install --upgrade pip
                     pip install -r requirements.txt
                     '''
-                    sh "pylint app.py train.py --output=pylint-report.txt --exit-zero"
-                    sh "flake8 app.py train.py --ignore=E501,E302 --output-file=flake8-report.txt"
-                    sh "black app.py train.py"
+                    sh ''' 
+                    . menv/bin/activate
+                    pylint app.py train.py --output=pylint-report.txt --exit-zero
+                    flake8 app.py train.py --ignore=E501,E302 --output-file=flake8-report.txt
+                    sh "black app.py train.py
+                    '''
                 }
             }
         }
