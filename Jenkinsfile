@@ -33,6 +33,20 @@ pipeline {
             }
         }
 
+
+        stage ('Pytest Tests') {
+            steps {
+                script {
+                    echo 'Pytests test cases'
+                    
+                    sh ''' 
+                    . menv/bin/activate
+                    pytest tests/
+                    '''
+                }
+            }
+        }
+
         stage ('Trivy File System') {
             steps {
                 script {
