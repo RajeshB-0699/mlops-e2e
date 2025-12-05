@@ -62,16 +62,14 @@ pipeline {
         stage('Build Docker Image') {
         steps {
             script {
-                echo 'Building Docker Image'
+                echo 'Fixing Docker socket and building image...'
 
-                // These 3 lines fix the permission every time the pipeline runs
-                sh 'sudo chmod 666 /var/run/docker.sock || true'
-                sh 'sudo chown root:docker /var/run/docker.sock || true'
-                sh 'sudo docker ps > /dev/null 2>&1 || true'   // tests the connection
-
-                // Your real command – this will now work
-                sh 'docker build -t my-app-mlops-01 .'
-                echo 'completed...'
+                // This single magic line fixes it every time the pipeline runs
+                sh '''
+                    sudo chmod 666 /var/run/docker.sock || true
+                    docker version
+                    docker build -t my-app-mlops-01 .
+                '''
             }
         }
     }
