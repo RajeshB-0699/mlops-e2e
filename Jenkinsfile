@@ -16,6 +16,8 @@ pipeline {
             steps {
                 script {
                     echo 'Testing & Linting'
+                    echo "cheking version"
+                    sh "python --version"
                 }
             }
         }
