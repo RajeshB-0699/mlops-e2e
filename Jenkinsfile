@@ -53,7 +53,7 @@ pipeline {
                     echo 'Scanning File System'
                     sh '''
                     . menv/bin/activate
-                    trivy fs --format table -o trivy-fs-report.html
+                    trivy fs . --format table -o trivy-fs-report.html
                     '''
                 }
             }
