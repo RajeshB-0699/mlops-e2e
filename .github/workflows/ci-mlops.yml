@@ -78,6 +78,11 @@ jobs:
            name: trivy-image-report
            path: "Github Actions/Trivy Automation/trivy-results-image.html"
 
+        - name: Pushing Docker Images to Docker hub
+          run: |
+             docker tag my-app-mlops-01:latest ${{ secrets.RAJESHB0699 }}/my-app-mlops-01:latest
+             docker push  ${{ secrets.RAJESHB0699 }}/my-app-mlops-01:latest
+
         
         
  
