@@ -17,6 +17,10 @@ jobs:
           uses: actions/setup-python@v4
           with:
             python-version: "3.10"
+
+        - name: create output directories
+          run: mkdir -p "Github Actions/Trivy Automation"
+
         - name: Install dependencies
           run: |
             python -m venv menv
@@ -24,13 +28,14 @@ jobs:
             pip install --upgrade pip
             pip install -r requirements.txt
             pip install flake8 black pylint pytest 
+
         - name: Run Trivy File system scan
           uses: aquasecurity/trivy-action@0.18.0
           with:
             scan-type: 'fs'
             scan-ref: '.'
-            format: 'sarif'
-            output: 'trivy-results.sarif'
+            format: 'html'
+            output: 'Github Actions/Trivy Automation/trivy-results.html'
             severity: 'HIGH,CRITICAL'
             scanners: 'vuln,secret,misconfig'
 
@@ -55,8 +60,8 @@ jobs:
           with:
             
             image-ref: 'my-app-mlops-01:latest'
-            format: 'table'
-            output: 'trivy-results-image.html'
+            format: 'html'
+            output: 'Github Actions/Trivy Automation/trivy-results-image.html'
             ignore-unfixed: true
             vuln-type: 'os,library'
             severity: 'CRITICAL,HIGH'
@@ -66,7 +71,7 @@ jobs:
           with:
             name: trivy reports
             path: trivy-results-image.html
-            
+
         - name: upload artifacts - fs
           uses: actions/upload-artifact@v4
           with:
