@@ -66,17 +66,17 @@ jobs:
             vuln-type: 'os,library'
             severity: 'CRITICAL,HIGH'
 
-        - name: upload artifacts -image
+        - name: Upload Trivy FS Report
           uses: actions/upload-artifact@v4
           with:
-            name: trivy reports
-            path: trivy-results-image.html
+            name: trivy-fs-report
+            path: "Github Actions/Trivy Automation/trivy-results.html"
 
-        - name: upload artifacts - fs
+        - name: Upload Trivy Image Report
           uses: actions/upload-artifact@v4
           with:
-            name: trivy reports
-            path: trivy-results.serif
+           name: trivy-image-report
+           path: "Github Actions/Trivy Automation/trivy-results-image.html"
 
         
         
