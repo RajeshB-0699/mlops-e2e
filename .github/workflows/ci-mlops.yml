@@ -34,7 +34,7 @@ jobs:
             severity: 'HIGH,CRITICAL'
             scanners: 'vuln,secret,misconfig'
 
-            
+
         
         
  
