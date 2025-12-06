@@ -58,19 +58,15 @@ jobs:
             password: ${{ secrets.DOCKER_PAT_TOKEN }}
         
         - name: Build Docker Image
-          run: |
-            docker build -t my-app-mlops-01 .
-
-        - name: Run Trivy Image Scan - Docker Image
-          uses: aquasecurity/trivy-action@0.28.0
+          uses: docker/build-push-action@v5
           with:
-            
-            image-ref: 'my-app-mlops-01:latest'
-            format: 'table'
-            output: 'Github Actions/Trivy Automation/trivy-results-image.html'
-            ignore-unfixed: true
-            vuln-type: 'os,library'
-            severity: 'CRITICAL,HIGH'
+            context: .
+            tags: my-app-mlops-01:latest
+            load: true
+            run: |
+              docker build -t my-app-mlops-01 .
+
+        
 
         - name: Upload Trivy FS Report
           uses: actions/upload-artifact@v4
@@ -89,10 +85,29 @@ jobs:
              docker tag my-app-mlops-01:latest ${{ secrets.DOCKER_USERNAME }}/my-app-mlops-01:latest
              docker push ${{ secrets.DOCKER_USERNAME }}/my-app-mlops-01:latest
 
+        - name: Run Trivy Image Scan - Docker Image
+          uses: aquasecurity/trivy-action@0.28.0
+          with:
+            
+            image-ref: '${{ secrets.DOCKER_USERNAME }}/my-app-mlops-01:latest'
+            format: 'table'
+            output: 'Github Actions/Trivy Automation/trivy-results-image.html'
+            ignore-unfixed: true
+            vuln-type: 'os,library'
+            severity: 'CRITICAL,HIGH'
+
         - name: Checking tools
           run : |
             docker --version
             aws --version
+
+        # - name: Deploy to AWS ECS
+        #   run: |
+        #         aws ecs update-service \
+        #         --cluster my-ecs-cluster \
+        #         --service my-ecs-service \
+        #         --force-new-deployment
+
 
 
 
