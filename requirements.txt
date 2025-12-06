@@ -5,3 +5,4 @@ pylint
 scikit-learn
 numpy
 flake8
+trivy
