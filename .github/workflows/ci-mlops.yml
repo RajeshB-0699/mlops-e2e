@@ -23,7 +23,18 @@ jobs:
             source menv/bin/activate
             pip install --upgrade pip
             pip install -r requirements.txt
-            pip install flake8 black pylint pytest trivy
+            pip install flake8 black pylint pytest 
+        - name: Run Trivy File system scan
+          uses: aquasecurity/trivy-action@v0.17.0
+          with:
+            scan-type: 'fs'
+            scan-ref: '.'
+            format: 'sarif'
+            output: 'trivy-results.sarif'
+            severity: 'HIGH,CRITICAL'
+            scanners: 'vuln,secret,misconfig'
+
+            
         
         
  
