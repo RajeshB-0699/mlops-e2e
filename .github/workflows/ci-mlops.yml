@@ -50,6 +50,17 @@ jobs:
           run: |
             docker build -t my-app-mlops-01 .
 
+        - name: Run Trivy Image Scan - Docker Image
+          uses: aquasecurity/trivy-action@0.28.0
+          with:
+            
+            image-ref: 'my-app-mlops-01:latest'
+            format: 'table'
+            output: 'trivy-results.html'
+            ignore-unfixed: true
+            vuln-type: 'os,library'
+            severity: 'CRITICAL,HIGH'
+
         
         
  
