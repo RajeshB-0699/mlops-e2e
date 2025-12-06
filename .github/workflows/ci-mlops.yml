@@ -34,7 +34,7 @@ jobs:
           with:
             scan-type: 'fs'
             scan-ref: '.'
-            format: 'html'
+            format: 'table'
             output: 'Github Actions/Trivy Automation/trivy-results.html'
             severity: 'HIGH,CRITICAL'
             scanners: 'vuln,secret,misconfig'
@@ -60,7 +60,7 @@ jobs:
           with:
             
             image-ref: 'my-app-mlops-01:latest'
-            format: 'html'
+            format: 'table'
             output: 'Github Actions/Trivy Automation/trivy-results-image.html'
             ignore-unfixed: true
             vuln-type: 'os,library'
