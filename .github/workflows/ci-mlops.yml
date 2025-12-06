@@ -45,7 +45,10 @@ jobs:
           run: |
             source menv/bin/activate
             pytest tests/
-
+        
+        - name: Build Docker Image
+          run: |
+            docker build -t my-app-mlops-01 .
 
         
         
