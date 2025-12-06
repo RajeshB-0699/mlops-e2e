@@ -34,6 +34,14 @@ jobs:
             severity: 'HIGH,CRITICAL'
             scanners: 'vuln,secret,misconfig'
 
+        - name: Pylint, flake8 and black tests
+          run: |
+            source menv/bin/activate
+            pylint app.py train.py --output=pylint_report.text --exit-zero
+            flake8 app.py train.py --ignore=E501,E302 --output-file=flake8-report.txt
+            black app.py train.py
+            echo "Completed!"
+
 
         
         
